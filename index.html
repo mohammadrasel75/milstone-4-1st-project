@@ -1,80 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Tracker</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Application Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tailwind.init.css">
 </head>
-<body>
+<body class="bg-slate-50 min-h-screen">
 
-<header class="w-[80%] mx-auto">
-    <h1 class="text-6xl font-bold text-green-500">Plant Tracker</h1>
-
-    <div class="grid grid-cols-3 gap-8">
-        <div class="bg-amber-200 p-4">
-            <p>Total</p>
-            <p id="total">0</p>
+    <header class="bg-white border-b px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <h1 class="text-2xl">Job Application Tracker</h1>
+        <div class="avatar online placeholder">
+           
         </div>
+    </header>
 
-        <div class="bg-green-200 p-4">
-            <p>Thrive</p>
-            <!-- 🔥 FIX: class → id -->
-            <p id="thrivingCount">0</p>
-        </div>
+    <main class="max-w-7xl mx-auto p-4 lg:p-8">
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="stat-card">
+                <div class="stat-title">Total Applied</div>
+                <div id="total-count" class="stat-value text-primary">0</div>
+            </div>
+            <div class="stat-card border-l-info">
+                <div class="stat-title">Interview</div>
+                <div id="interview-count" class="stat-value text-info">0</div>
+            </div>
+            <div class="stat-card border-l-error">
+                <div class="stat-title">Rejected</div>
+                <div id="rejected-count" class="stat-value text-error">0</div>
+            </div>
+        </section>
 
-        <div class="bg-red-200 p-4">
-            <p>Struggling</p>
-            <p id="strugglingCount">0</p>
-        </div>
-    </div>
-</header>
-
-<hr class="my-5">
-
-<main class="w-[80%] mx-auto">
-
-    <div class="mb-6">
-        <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn" class="bg-black text-white px-5 py-2">All</button>
-
-        <!-- 🔥 FIX: spelling -->
-        <button onclick="toggleStyle('thriving-filter-btn')" id="thriving-filter-btn" class="bg-gray-300 px-5 py-2">Thriving</button>
-
-        <button onclick="toggleStyle('struggling-filter-btn')" id="struggling-filter-btn" class="bg-gray-300 px-5 py-2">Struggling</button>
-    </div>
-
-    <!-- ALL CARD -->
-    <section id="allCards" class="space-y-6">
-
-        <div class="card flex justify-between border p-8">
-            <div class="space-y-6">
-                <div>
-                    <p class="plantName text-4xl">Plant 1</p>
-                    <p class="latinName">Latin 1</p>
-                </div>
-
-                <div class="flex gap-2">
-                    <p class="light bg-gray-200 px-5">Bright</p>
-                    <p class="water bg-gray-200 px-5">Weekly</p>
-                </div>
-
-                <p class="status">Good</p>
-                <p class="notes">Nice growth</p>
-
-                <div class="flex gap-5">
-                    <button class="thriving-btn bg-green-200 px-4 py-2">Thrive</button>
-                    <button class="struggling-btn bg-red-200 px-4 py-2">Struggle</button>
+        <section class="bg-white rounded-3xl shadow-sm p-6 lg:p-10 border border-gray-100">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-800">Available Jobs</h2>
+                <div class="badge badge-lg bg-slate-100 border-none font-bold">
+                    <span id="section-count" class="ml-2 text-primary">0</span>
                 </div>
             </div>
-        </div>
 
-    </section>
+            <div role="tablist" class=" bg-slate-100">
+                <button role="tab" id="tab-all" class="tab tab-active" onclick="switchTab('all')">All Jobs</button>
+                <button role="tab" id="tab-interview" class="tab" onclick="switchTab('interview')">Interview</button>
+                <button role="tab" id="tab-rejected" class="tab" onclick="switchTab('rejected')">Rejected</button>
+            </div>
 
-    <!-- 🔥 FIX: missing section -->
-    <section id="filtered-section" class="space-y-6 hidden"></section>
+            <div id="job-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
+                </div>
+        </section>
+    </main>
 
-</main>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

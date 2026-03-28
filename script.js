@@ -1,125 +1,88 @@
-let thrivingList = []; 
-let strugglingList = []
+// Initial Data (8 Meaningful Cards)
+let jobs = [
+    { id: 1, companyName: "Mobile First Corp", position: "React Native Developer", location: "Remote", type: "Full-time", salary: "৳1200k", description: "Develop modern user interfaces using Tailwind and React.", status: "all" },
+    { id: 2, companyName: "WebFlow Agency", position: "Web Designer & Developer", location: "New York", type: "On-site", salary: "৳14000k", description: "Build scalable microservices and database solutions.", status: "all" },
+    { id: 3, companyName: "DataViz Solutions", position: "UI/UX Designer", location: "Hybrid", type: "Contract", salary: "৳800/hr", description: "Design intuitive user flows and high-fidelity prototypes.", status: "all" },
+    { id: 4, companyName: "SecureNet", position: "Security Analyst", location: "Remote", type: "Full-time", salary: "৳20000k", description: "Monitor systems and perform penetration testing audits.", status: "all" },
+    { id: 5, companyName: "DataGrid", position: "Data Scientist", location: "Austin", type: "Full-time", salary: "৳25000k", description: "Apply machine learning models to complex financial data.", status: "all" },
+    { id: 6, companyName: "SwiftPay", position: "Mobile Developer", location: "Chicago", type: "Hybrid", salary: "৳27000k", description: "Maintain and improve our core iOS and Android apps.", status: "all" },
+    { id: 7, companyName: "GreenLoop", position: "Product Manager", location: "Remote", type: "Full-time", salary: "৳25800k", description: "Lead the roadmap for sustainable energy software products.", status: "all" },
+    { id: 8, companyName: "MarketLink", position: "SEO Specialist", location: "London", type: "Part-time", salary: "৳27000k", description: "Optimize search engine rankings and content strategy.", status: "all" }
+];
 
-let total = document.getElementById('total');
-let strugglingCount = document.getElementById('strugglingCount');
-let thrivingCount = document.getElementById('thrivingCount');
+let activeTab = 'all';
 
-const allFilterBtn = document.getElementById('all-filter-btn');
-const thrivingFilterBtn = document.getElementById('thriving-filter-btn');
-const strugglingFilterBtn = document.getElementById('struggling-filter-btn');
-const filteredSection = document.getElementById('filtered-section')
-
-
-
-const allCardSection = document.getElementById('allCards');
-const mainContainer = document.querySelector('main')
-
-
-function calculateCount() {
-    total.innerText = allCardSection.children.length  //3
-    thrivingCount.innerText = thrivingList.length
-    strugglingCount.innerText = strugglingList.length
-
-}
-
-calculateCount();
-
-function toggleStyle(id){
-    allFilterBtn.classList.remove('bg-black','text-white')
-    thrivingFilterBtn.classList.remove('bg-black','text-white')
-    strugglingFilterBtn.classList.remove('bg-black','text-white')
-
-    allFilterBtn.classList.add('bg-gray-300','text-black')
-    thrivingFilterBtn.classList.add('bg-gray-300','text-black')
-    strugglingFilterBtn.classList.add('bg-gray-300','text-black')
-
-    // console.log(id)
-
-    const selected = document.getElementById(id)
-
-    // console.log(selected)
-
-    selected.classList.remove('bg-gray-300','text-black')
-    selected.classList.add('bg-black', 'text-white')
-
-    if(id == 'thriving-filter-btn'){
-        allCardSection.classList.add('hidden');
-        filteredSection.classList.remove('hidden'); 
-    }else if(id == 'all-filter-btn'){
-        allCardSection.classList.remove('hidden');
-        filteredSection.classList.add('hidden');
-    }
-}
-
-
-mainContainer.addEventListener('click', function(event){
-
-    console.log(event.target.parentNode);
-
-    console.log(event.target.classList.contains('thriving-btn'));
-    if(event.target.classList.contains('thriving-btn')){
-        
-    const parentNode = event.target.parentNode;
-    const plantName = parentNode.querySelector('.plantName').innerText
-    const latinName = parentNode.querySelector('.latinName').innerText
-    const light = parentNode.querySelector('.light').innerText
-    const water = parentNode.querySelector('.water').innerText
-    const status = parentNode.querySelector('.status').innerText
-    const notes = parentNode.querySelector('.notes').innerText
-
-    const cardInfo = {
-        plantName, 
-        latinName,
-        light,
-        water,
-        status,
-        notes
-    }
-
-    const plantExist = thrivingList.find(item => item.plantName == cardInfo.plantName)
+// Main Render Function
+function render() {
+    const grid = document.getElementById('job-grid');
+    const filteredJobs = activeTab === 'all' ? jobs : jobs.filter(j => j.status === activeTab);
     
-    if (!plantExist){
-        thrivingList.push(cardInfo)
+    // Update Dashboard Counts
+    document.getElementById('total-count').innerText = jobs.length;
+    document.getElementById('interview-count').innerText = jobs.filter(j => j.status === 'interview').length;
+    document.getElementById('rejected-count').innerText = jobs.filter(j => j.status === 'rejected').length;
+    document.getElementById('section-count').innerText = filteredJobs.length;
+
+    // Handle Empty States
+    if (filteredJobs.length === 0) {
+        grid.innerHTML = `
+            <div class="col-span-full py-16 text-center">
+                <i class="fa-solid fa-folder-open text-6xl text-slate-200 mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-400">No Jobs Available</h3>
+                <p class="text-slate-400 italic">Select 'All' to see all opportunities.</p>
+            </div>`;
+        return;
     }
-   renderThriving ()    
-    }
-        
 
-                   
-})
-
-function renderThriving () {
-    filteredSection.innerHTML = ''
-
-    for(let thrive of thrivingList){
-        console.log(thrive)
-        let div = document.createElement('div');
-        div.className = 'card flex justify-between border p-8'
-        div.innerHTML = `
-         <div class="space-y-6">
-                <!-- part 1-->
-                <div>
-                    <p class="plantName text-4xl">${thrive.plantName}Plant Name 1</p>
-                    <p class="latinName">Latin Name </p>
-                </div>
-                <!-- part 2 -->
-                 <div class="flex gap-2">
-                    <p class="light bg-gray-200 px-5">Bright Indicate </p>
-                    <p class="water bg-gray-200 px-5">Weekly</p>
-                 </div>
-                 <!-- part 3 -->
-                  <p class="status">Not applicable </p>
-                  <p class="notes">New leaf unfurling by the east window. </p>
-                  <div class="flex gap-5">
-                    <button class="thriving-btn bg-green-200 px-4 py-2">Thrive</button>
-                    <button class="struggling-btn bg-red-200 px-4 py-2">Struggle</button>
-                  </div>
+    // Render Cards
+    grid.innerHTML = filteredJobs.map(job => `
+        <div class="card bg-white border border-slate-100 p-6 job-card relative group">
+            <button onclick="deleteJob(${job.id})" class="absolute top-4 right-4 text-slate-300 hover:text-error opacity-0 group-hover:opacity-100 transition-opacity">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-bold text-lg text-slate-800">${job.companyName}</h3>
+                <span class="badge badge-sm badge-ghost font-bold">${job.type}</span>
             </div>
-            <!-- main part 2 -->
-            <div>
-                <button class="btn-delete bg-red-200 text-red-600 px-4 py-2">Delete</button>
-            </div> `
-        filteredSection.appendChild(div)    
-    }
+            <p class="text-primary font-bold text-sm mb-3">${job.position}</p>
+            <div class="flex gap-4 text-xs text-slate-500 mb-4">
+                <span><i class="fa-solid fa-location-dot mr-1"></i>${job.location}</span>
+                <span><i class="fa-solid fa-sack-dollar mr-1"></i>${job.salary}</span>
+            </div>
+            <p class="text-sm text-slate-600 line-clamp-2 mb-6">${job.description}</p>
+            <div class="flex gap-2 mt-auto">
+                <button onclick="updateStatus(${job.id}, 'interview')" 
+                    class="btn btn-sm ${job.status === 'interview' ? 'btn-info' : 'btn-outline btn-info'}">
+                    Interview
+                </button>
+                <button onclick="updateStatus(${job.id}, 'rejected')" 
+                    class="btn btn-sm ${job.status === 'rejected' ? 'btn-error' : 'btn-outline btn-error'}">
+                    Rejected
+                </button>
+            </div>
+        </div>
+    `).join('');
 }
+
+// Global Actions
+window.switchTab = (tab) => {
+    activeTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+    document.getElementById(`tab-${tab}`).classList.add('tab-active');
+    render();
+};
+
+window.updateStatus = (id, newStatus) => {
+    const index = jobs.findIndex(j => j.id === id);
+    // Toggle Status: Moves the card to the specific tab and updates dashboard count
+    jobs[index].status = newStatus;
+    render();
+};
+
+window.deleteJob = (id) => {
+    jobs = jobs.filter(j => j.id !== id);
+    render();
+};
+
+// Start
+render();
