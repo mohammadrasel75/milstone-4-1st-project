@@ -2,12 +2,12 @@
 let jobs = [
     { id: 1, companyName: "Mobile First Corp", position: "React Native Developer", location: "Remote", type: "Full-time", salary: "৳1200k", description: "Develop modern user interfaces using Tailwind and React.", status: "all" },
     { id: 2, companyName: "WebFlow Agency", position: "Web Designer & Developer", location: "New York", type: "On-site", salary: "৳14000k", description: "Build scalable microservices and database solutions.", status: "all" },
-    { id: 3, companyName: "DataViz Solutions", position: "UI/UX Designer", location: "Hybrid", type: "Contract", salary: "৳800/hr", description: "Design intuitive user flows and high-fidelity prototypes.", status: "all" },
-    { id: 4, companyName: "SecureNet", position: "Security Analyst", location: "Remote", type: "Full-time", salary: "৳20000k", description: "Monitor systems and perform penetration testing audits.", status: "all" },
-    { id: 5, companyName: "DataGrid", position: "Data Scientist", location: "Austin", type: "Full-time", salary: "৳25000k", description: "Apply machine learning models to complex financial data.", status: "all" },
-    { id: 6, companyName: "SwiftPay", position: "Mobile Developer", location: "Chicago", type: "Hybrid", salary: "৳27000k", description: "Maintain and improve our core iOS and Android apps.", status: "all" },
-    { id: 7, companyName: "GreenLoop", position: "Product Manager", location: "Remote", type: "Full-time", salary: "৳25800k", description: "Lead the roadmap for sustainable energy software products.", status: "all" },
-    { id: 8, companyName: "MarketLink", position: "SEO Specialist", location: "London", type: "Part-time", salary: "৳27000k", description: "Optimize search engine rankings and content strategy.", status: "all" }
+    { id: 3, companyName: "DataViz Solutions", position: "Data Visualization Specialist", location: "Hybrid", type: "Contract", salary: "৳800/hr", description: "Design intuitive user flows and high-fidelity prototypes.", status: "all" },
+    { id: 4, companyName: "CloudFirst Inc", position: "SBackend Developer", location: "Remote", type: "Full-time", salary: "৳20000k", description: "Monitor systems and perform penetration testing audits.", status: "all" },
+    { id: 5, companyName: "Innovation Labs", position: "UI/UX Engineer", location: "Austin", type: "Full-time", salary: "৳25000k", description: "Apply machine learning models to complex financial data.", status: "all" },
+    { id: 6, companyName: "MegaCorp Solutions", position: "JavaScript Developer", location: "Chicago", type: "Hybrid", salary: "৳27000k", description: "Maintain and improve our core iOS and Android apps.", status: "all" },
+    { id: 7, companyName: "StartupXYZ", position: "Full Stack Engineer", location: "Remote", type: "Full-time", salary: "৳25800k", description: "Lead the roadmap for sustainable energy software products.", status: "all" },
+    { id: 8, companyName: "TechCorp Industries", position: "Senior Frontend Developer", location: "London", type: "Part-time", salary: "৳27000k", description: "Optimize search engine rankings and content strategy.", status: "all" }
 ];
 
 let activeTab = 'all';
